@@ -1,0 +1,35 @@
+<p>This is test</p>
+<input id="selector">
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		console.log("jquery is working");
+		$("#selector").autocomplete({
+		    source: function (request, response) {
+				var search_term = $('#selector').val();
+				console.log(search_term);
+		         $.ajax({
+		             url: "http://localhost:3000/search?q=" + search_term,
+		             type: "GET",
+		             data: request,
+		             success: function (data) {
+		                 response($.map(data, function (el) {
+		                     return {
+		                         label: el.name,
+		                         value: el.name
+		                     };
+		                 }));
+		             }
+		         });
+		    },
+		    select: function (event, ui) {
+		        // Prevent value from being put in the input:
+		        this.value = ui.item.label;
+		        // Set the next input's value to the "value" of the item.
+		        $(this).next("input").val(ui.item.value);
+		        event.preventDefault();
+		    }
+		});
+	})
+
+</script>
