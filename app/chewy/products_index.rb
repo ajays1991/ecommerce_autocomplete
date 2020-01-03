@@ -30,6 +30,10 @@ class ProductsIndex < Chewy::Index
 				split_on_case_change: true,
 				preserve_original: true,
 				stem_english_possessive: true
+			},
+			snowball_filter: {
+				type: "snowball",
+				language: "english"
 			}
 		},
     	analyzer: {
@@ -48,13 +52,17 @@ class ProductsIndex < Chewy::Index
       		lower_keyword_autocomplete: {
       			tokenizer: 'keyword',
       			filter: ["lowercase"]
+      		},
+      		snowball_analyzer: {
+      			tokenizer: 'whitespace',
+      			filter: ['snowball_filter']
       		}
     	}
   	}
 
 
   	define_type Product.all.includes(:category) do
-	    field :name, type: 'text', fields: { lower_keyword_analyzed: { type: 'text', analyzer: 'lower_keyword_autocomplete'} ,standard_analyzed:{ type: 'text', analyzer: 'standard'} ,synonym_analyzed: { type: 'text', analyzer: 'autcomplete_synonym_analyzer' }, edge_n_gram_analyzed: { type: 'text', analyzer: 'autocomplete_edge_n_gram_analyzer' }, word_delimiter_analyzed: { type: 'text', analyzer: 'autocomplete_word_delimiter_analyzer' } }
+	    field :name, type: 'text', fields: { snowball_analyzed: { type: 'text', analyzer: 'snowball_analyzer', search_analyzer: 'standard' } ,fuzzy_analyzed: { type: 'text', analyzer: 'autocomplete_edge_n_gram_analyzer', search_analyzer: 'standard'} ,lower_keyword_analyzed: { type: 'text', analyzer: 'lower_keyword_autocomplete'} ,standard_analyzed:{ type: 'text', analyzer: 'standard'} ,synonym_analyzed: { type: 'text', analyzer: 'autcomplete_synonym_analyzer' }, edge_n_gram_analyzed: { type: 'text', analyzer: 'autocomplete_edge_n_gram_analyzer' }, word_delimiter_analyzed: { type: 'text', analyzer: 'autocomplete_word_delimiter_analyzer' } }
 	    field :description, type: 'keyword'
 	    field :category, value: ->(product) { product.category.name }, analyzer: 'lower_keyword_autocomplete'
 	    field :price, type: 'long'

@@ -21,12 +21,18 @@ Product.create!(category: book_category, name: Faker::Book.title, description: "
 
 Product.create!(category: phone_category, name: 'Iphone 9', description: 'A new iphone', price: 10000)
 Product.create!(category: phone_category, name: 'Iphone 10', description: 'A new iphone', price: 10000)
+
+Product.create!(category: phone_category, name: 'Iphones 9', description: 'A new iphone', price: 10000)
+Product.create!(category: phone_category, name: 'Iphones 10', description: 'A new iphone', price: 10000)
+
 Product.create!(category: phone_category, name: 'Samsung galaxy s 10', description: 'A new samsung', price: 10000)
 Product.create!(category: phone_category, name: 'Samsung galaxy 11', description: 'A new samsung', price: 10000)
 Product.create!(category: phone_category, name: 'Samsung android', description: 'A new samsung', price: 10000)
 Product.create!(category: phone_category, name: 'LG AndroidPhone', description: 'A new samsung', price: 10000)
 Product.create!(category: phone_category, name: 'Micromax android', description: 'A new micromax', price: 10000)
 Product.create!(category: phone_category, name: 'Micromax audrino', description: 'A new samsung', price: 10000)
+Product.create!(category: phone_category, name: 'Micromax androiding', description: 'A new micromax', price: 10000)
+
 
 Product.create!(category: jeans_category, name: 'Levis jeans', description: 'A new levis', price: 1000)
 Product.create!(category: jeans_category, name: 'Levis pants', description: 'A new levis', price: 1000)

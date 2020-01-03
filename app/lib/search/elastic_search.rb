@@ -21,6 +21,26 @@ module Search
               }
             },
             {
+              match: {
+                "name.fuzzy_analyzed" => {
+                  query: q,
+                  fuzziness: 2,
+                  prefix_length: 3,
+                  boost: 1000
+                }
+              }
+            },
+            {
+              match: {
+                "name.synonym_analyzed" => {
+                  query: q,
+                  fuzziness: 2,
+                  prefix_length: 3,
+                  boost: 1000
+                }
+              }
+            },
+            {
               term: {
                 "name.edge_n_gram_analyzed" => {
                   value: q,
