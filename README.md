@@ -1,24 +1,28 @@
-# README
+# Ecommerce autocomplete using elasticsearch
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Installing Elasticsearch
+Install elasticsearch following this link https://www.elastic.co/guide/en/elasticsearch/reference/6.0/install-elasticsearch.html.
 
-Things you may want to cover:
+Note: Use elasticsearch 6 as chewy support only till elasticsearch 6. https://github.com/toptal/chewy
 
-* Ruby version
+### Database setup
+Run the following commands to setup db and import data to elasticsearch
 
-* System dependencies
+```
+rake db:create
 
-* Configuration
+rake db:migrate
 
-* Database creation
+rake db:seed
 
-* Database initialization
+rake chewy:reset
 
-* How to run the test suite
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+### Starts Rails server
 
-* Deployment instructions
+start rails server on local machine
 
-* ...
+`rails s`
+
+navigate to http://localhost:3000
